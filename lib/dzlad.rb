@@ -254,7 +254,7 @@ module Dzlad
             $stderr.print err e.message
             next
           end
-          id = res['location'].split('ID=')[1] if res.code == '302' and res.key?['location']
+          id = res['location'].split('ID=')[1] if res.code == '302' and res.key? 'location'
           if id
             $stdout.print msg "Uploaded #{File.basename(tarball)} [#{id}]"; ids << id
             comment = $stdin.read if comment == '-' #read comment from stdin if it's '-'
@@ -348,22 +348,17 @@ ignored by default next time
       @cookie = login_aur(@opts.cookie, @opts.username, @opts.password)
       ($sdterr.print err 'AUR login failed'; exit EXIT::AUR_BAD_AUTH) unless @cookie
       if @opts.save_cookie_in
-        if @opts.save_cookie_in == '-'
-          $stdout.print msg "%s", @cookie #write cookie to $stdout if -c -
-        else
-          try_make_dzlad_rootdir if @opts.save_cookie_in == Dzlad::Session
-          File.open(@opts.save_cookie_in,'w') {|f| f << @cookie} # note this overwrites any existing file. (!)
-        end
+        try_make_dzlad_rootdir if @opts.save_cookie_in == Dzlad::Session
+        File.open(@opts.save_cookie_in,'w') {|f| f << @cookie} # note this overwrites any existing file. (!)
       end
     end
 
     # cookie is always re-fetched (re-login) if a username is explicitly given.
     def login_aur(cookie, username, password)
       (return cookie.include?('AURSID=') ? cookie : (File.open(cookie) {|f| f.read} rescue nil)) if cookie and not username
-      return cooked if cooked = File.open(Dzlad::Session).read rescue nil unless username or not cooked # use cookie "cooked" in a former session if no cookie or username is given in the command line.
+      (cooked = File.open(Dzlad::Session).read rescue nil; return cooked if cooked) unless username # use cookie "cooked" in a former session if no cookie or username is given in the command line.
       username ||=  %x{read    -p 'Username: ' i;echo -n $i}
-      password ||=  %x{read -s -p 'Password: ' i;echo -n $i}
-      $stdout.puts
+      (password =  %x{read -s -p 'Password: ' i;echo -n $i}; $stdout.puts) unless password
       return AUR.new.login(username, password)
     end
 

@@ -95,7 +95,9 @@ module Dzlad
       r_len = width - len_l
       chart = ''
       hash.each do |k,v|
-        chart << k.ljust(l_len) << sep << v.to_block(r_len, len_l).lstrip
+        rhs = v.to_block(r_len, len_l).lstrip
+        rhs << "\n" unless rhs.end_with?("\n")
+        chart << k.ljust(l_len) << sep << rhs
       end
       chart
     end
