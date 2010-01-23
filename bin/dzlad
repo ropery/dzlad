@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+require 'dzlad'
+
+Dzlad::Dzlad.start(ARGV)
+
+# vim:ts=2 sw=2 et:
