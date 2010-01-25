@@ -69,7 +69,7 @@ module Dzlad
           opts.on('--remember', 'Ignore next time those not in AUR') do
             @opts.remember = true
           end
-          opts.on('--[no-]-rel', 'Compare only version, omit pkgrel') do |r|
+          opts.on('--[no-]rel', 'Compare only version, omit pkgrel') do |r|
             @opts.ignore_rel = !r
           end
         end
