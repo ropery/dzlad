@@ -39,6 +39,7 @@ module Dzlad
       :by_id          => false,
       :upgrade_ignore => nil,
       :remember       => false,
+      :ignore_rel     => false,
       :quiet          => false
       }
       # maybe read config file here
@@ -67,6 +68,9 @@ module Dzlad
           end
           opts.on('--remember', 'Ignore next time those not in AUR') do
             @opts.remember = true
+          end
+          opts.on('--[no-]-rel', 'Compare only version, omit pkgrel') do |r|
+            @opts.ignore_rel = !r
           end
         end
 
@@ -205,11 +209,13 @@ module Dzlad
         aur = AUR.new
         list.each {|pkg|
           pkg, local_ver = pkg.split
+          pad = add_attr('.' * (max_len - pkg.size + 1), :black)
           info = aur.info(pkg) rescue nil
           (notfound << pkg; next) unless info
           aur_ver = info['Version']
-          pad = add_attr('.' * (max_len - pkg.size + 1), :black)
-          case %x{/usr/bin/vercmp #{aur_ver} #{local_ver}}.chomp
+          ver_cmp = @opts.ignore_rel ? %x{/usr/bin/vercmp #{aur_ver.rpartition('-').first} #{local_ver.rpartition('-').first}}.chomp : %x{/usr/bin/vercmp #{aur_ver} #{local_ver}}.chomp
+          aur_ver = add_attr(aur_ver, :red, :bold) if info['OutOfDate']
+          case ver_cmp
           when '1'  then upgradable << pkg; $stdout.print add_attr(pkg,:white, :bold), pad, add_attr("#{local_ver} -> #{aur_ver}\n", :green,  :bold) unless @opts.quiet
           when '-1' then localnewer << pkg; $stdout.print add_attr(pkg,:white, :reverse), pad, add_attr("#{local_ver} >> #{aur_ver}\n", :yellow, :bold) unless @opts.quiet
           end
@@ -274,7 +280,7 @@ module Dzlad
           }
         end
         ($stderr.print err "No ID retrieved for any of the given packages"; exit EXIT::FAIL) if ids.empty?
-        $stdout.print msg "%s", (aur.read_package_action_response(aur.__send__(@opts.action.to_sym,*ids)) || "Unkown error while voting")
+        $stdout.print msg "%s", (aur.read_package_action_response(aur.__send__(@opts.action.to_sym,*ids)) || "Unkown error occurred, action failed: #{@opts.action}")
       end
     end
 
