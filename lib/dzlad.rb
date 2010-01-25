@@ -13,7 +13,7 @@ module Dzlad
     include Printing
 
     Meta = {
-      :version => ['0.1.1', '20090122'],
+      :version => ['0.1.1', '20090125'],
       :authors => ['lolilolicon <lolilolicon@gmail.com>'],
       :license => ['MIT']
     }
@@ -204,7 +204,18 @@ module Dzlad
         list = %x{/usr/bin/pacman -Qm}.split("\n") #["pkgname ver-rel", ...]
         ignored =  File.open(Dzlad::Ignored).read.split rescue []
         ignores = ignored + (@opts.upgrade_ignore || [])
-        list -= ignores
+        #list -= ignores #-*facepalm*
+        unless ignores.empty?
+          # diff the sorted list and ignore list here.
+          temp = ignores.sort.dup
+          lost = []
+          list.sort.each {|pkg|
+            pn = pkg.split.first
+            temp.shift until !temp.first or pn <= temp.first
+            temp.first == pn ? temp.shift : lost << pkg
+          }
+          list = lost
+        end
         max_len = list.map{|s| s.size}.max
         aur = AUR.new
         list.each {|pkg|
