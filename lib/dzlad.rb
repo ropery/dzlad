@@ -231,7 +231,7 @@ module Dzlad
           when '-1' then localnewer << pkg; $stdout.print add_attr(pkg,:white, :reverse), pad, add_attr("#{local_ver} >> #{aur_ver}\n", :yellow, :bold) unless @opts.quiet
           end
         }
-        $stdout.print msg 'Upgradable AUR Packagess:'
+        $stdout.print msg 'Upgradable AUR Packages:'
         $stdout.print upgradable.join(' '), "\n"
         if @opts.remember
           try_make_dzlad_rootdir
