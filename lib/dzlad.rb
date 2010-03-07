@@ -13,7 +13,7 @@ module Dzlad
     include Printing
 
     Meta = {
-      :version => ['0.1.1', '20090125'],
+      :version => ['0.1.1', '20100307'],
       :authors => ['lolilolicon <lolilolicon@gmail.com>'],
       :license => ['MIT']
     }
@@ -40,7 +40,8 @@ module Dzlad
       :upgrade_ignore => nil,
       :remember       => false,
       :ignore_rel     => false,
-      :quiet          => false
+      :quiet          => false,
+      :remote_newer_only => false
       }
       # maybe read config file here
       @opts = OpenStruct.new(@config)
@@ -71,6 +72,9 @@ module Dzlad
           end
           opts.on('--[no-]rel', 'Compare only version, omit pkgrel') do |r|
             @opts.ignore_rel = !r
+          end
+          opts.on('--newer', 'Ignore unless AUR version\'s newer') do
+            @opts.remote_newer_only = true
           end
         end
 
@@ -228,7 +232,7 @@ module Dzlad
           aur_ver = add_attr(aur_ver, :red, :bold) if info['OutOfDate']
           case ver_cmp
           when '1'  then upgradable << pkg; $stdout.print add_attr(pkg,:white, :bold), pad, add_attr("#{local_ver} -> #{aur_ver}\n", :green,  :bold) unless @opts.quiet
-          when '-1' then localnewer << pkg; $stdout.print add_attr(pkg,:white, :reverse), pad, add_attr("#{local_ver} >> #{aur_ver}\n", :yellow, :bold) unless @opts.quiet
+          when '-1' then localnewer << pkg; $stdout.print add_attr(pkg,:white, :reverse), pad, add_attr("#{local_ver} >> #{aur_ver}\n", :yellow, :bold) unless @opts.quiet or @opts.remote_newer_only
           end
         }
         $stdout.print msg 'Upgradable AUR Packages:'
