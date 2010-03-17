@@ -1,9 +1,9 @@
 body {
-  font-size:14px;
-  font-family:Helvetica,Arial,freesans,clean,sans-serif;
+  font-size:16px;
+  font-family:Georgia,Helvetica,Arial,freesans,clean,sans-serif;
   *font-size:small;
-  line-height:25px;
-  background:#ffffff;
+  line-height:23px;
+  background:#ababab;
   text-align:left;
 }
 #content {
@@ -12,7 +12,7 @@ body {
 }
 h1 {
   font-size: 3.8em;
-  color: #100810;
+  color: #131313;
   margin-bottom: 3px;
 }
 h1 .small {
@@ -23,14 +23,14 @@ h1 a {
 }
 h2 {
   font-size: 1.5em;
-  color: #100810;
+  color: #131313;
 }
 h3 {
   text-align: center;
-  color: #100810;
+  color: #131313;
 }
 a {
-  color: #100810;
+  color: #131313;
 }
 .description {
   font-size: 13px;
@@ -42,8 +42,9 @@ a {
 }
 pre,code {
   font:100% Consolas,Profont,Monaco,"DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;*font-size:100%;
-  background: #181818;
+  background: #777777;
   color: #e7e7e7;
+  border-left: solid 3px #1793d1;
   padding: 10px;
 }
 hr {
@@ -53,6 +54,6 @@ hr {
 }
 .footer {
   text-align:center;
-  padding-top:30px;
-  font-style: italic;
+  padding-top:20px;
+  font-style: normal;
 }
