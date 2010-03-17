@@ -3,7 +3,7 @@ body {
   font-family:Georgia,Helvetica,Arial,freesans,clean,sans-serif;
   *font-size:small;
   line-height:23px;
-  background:#ababab;
+  background:#cdcdcd;
   text-align:left;
 }
 #content {
@@ -42,9 +42,9 @@ a {
 }
 pre,code {
   font:100% Consolas,Profont,Monaco,"DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;*font-size:100%;
-  background: #777777;
+  background: #333333;
   color: #e7e7e7;
-  border-left: solid 3px #1793d1;
+  border-left: solid 3px #111111;
   padding: 10px;
 }
 hr {
