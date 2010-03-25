@@ -1,3 +1,9 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>dzlad - README</title>
+</head>
+<body style="background:#eeeeec;width:86%;margin-left:7%">
 Dzlad functions as a command line interface to the [AUR][1]. It is written in Ruby.
   [1]: http://aur.archlinux.org "ArchLinux User Repository"
 
@@ -44,7 +50,7 @@ Also note that the AUR currently supports only two simple "regexp", i.e. *%* for
 <pre style="background-color:#232527;color:#6c6c6c;padding:0.8em 0.8em 0.8em 0.8em;font-weight:bold"><code><span style="font-weight:normal">$ dzlad -u</span>
 <span style="background-color:#FEF3B5;color:#232527">firefox-pgo</span><span style="font-weight:normal">.......................</span><span style="color:#e2d65a">3.6.2-1 >> </span><span style="color:#E25A6B">3.6-1</span>
 <span style="background-color:#FEF3B5;color:#232527">mypaint-git</span><span style="font-weight:normal">.......................</span><span style="color:#e2d65a">20100307-1 >> 20100208-2</span>
-<span style="background-color:#FEF3B5;color:#232527">vim-snipmate</span><span style="font-weight:normal">......................</span><span style="color:#9AE25A">0.83-1 -> 0.83-5</span>
+<span style="color:#FEF3B5">vim-snipmate</span><span style="font-weight:normal">......................</span><span style="color:#9AE25A">0.83-1 -> 0.83-5</span>
 <span style="color:#9AE25A;font-weight:bold">::</span> <span style="font-weight:normal">Upgradable AUR Packages:
 vim-snipmate</span>
 </code></pre>
@@ -61,7 +67,7 @@ $ dzlad -p msort-8.53-1.src.tar.gz@system:"New Release." --vote -u userfoo:passb
 #### Vote, flag, notify, adopt, disown, delete, unvote, unflag, unnotify
 
 <pre style="background-color:#232527;color:#6c6c6c;padding:0.8em 0.8em 0.8em 0.8em"><code>$ dzlad -a delete -u userfoo:passbar -c -- yajl-ruby
-<span style="color:#9AE25A;font-weight:bold">:: None of the selected packages could be deleted.
+<span style="color:#9AE25A;font-weight:bold">::</span> None of the selected packages could be deleted.
 </code></pre>
 
 Oops, \`delete' is TU/dev only ^
@@ -90,3 +96,5 @@ irb(main):004:0> aur.addComment('33877', "Please note the dzlad-git package has 
 ### Files
 
 ~/.dzlad/{cookie,upgrade\_ignore}
+</body>
+</html>
