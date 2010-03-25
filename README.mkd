@@ -1,0 +1,48 @@
+Dzlad functions as a command line interface to the [AUR][1]. It is written in Ruby.
+  [1]: http://aur.archlinux.org "ArchLinux User Repository"
+
+***
+
+## Dependencies
+    \* ruby (1.9)
+    \* pacman (for -u)
+    \* tar (for -d)
+
+***
+
+## Usage
+
+### Download build scripts (PKGBUILD, INSTALL, etc.)
+
+    $ dzlad ffcast
+    :: AUR package ffcast saved in /tmp/aur/
+    $ cd ffcast
+    $ vim PKGBUILD
+    $ makepkg -csir
+
+### Search for packages with a keyword
+
+<pre style="background-color:#232527;color:#6c6c6c;padding:0.8em 0.8em 0.8em 0.8em;font-weight:bold"><code><span style="font-weight:normal">$ dzlad -s firefox%pgo</span>
+<span style="color:#E25AC5">aur</span>/<span style="color:#FEF3B5">firefox-pgo</span> <span style="color:#E25A6B">3.6-1</span> <span style="color:#4F3D53"|194|</span>
+    <span style="font-weight:normal">Mozilla Firefox customizable web browser (XULRunner independent, PGO optimized, 64-bit TraceMonkey)</span>
+<span style="color:#E25AC5">aur</span>/<span style="color:#FEF3B5">firefox-pgo-beta</span> <span style="color:#E25A6B">3.6-1</span> <span style="color:#4F3D53"|142|</span>
+    <span style="font-weight:normal">Mozilla Firefox customizable web browser (XULRunner independent, PGO optimized, 64-bit TraceMonkey, beta)</span>
+<span style="color:#E25AC5">aur</span>/<span style="color:#FEF3B5">firefox-pgo-minefield</span> <span style="color:#9AE25A">100207-1</span> <span style="color:#4F3D53"|9|</span>
+    <span style="font-weight:normal">Mozilla Firefox customizable web browser (XULRunner independent, PGO optimized, 64-bit TraceMonkey, dev tree)</span>
+<span style="color:#E25AC5">aur</span>/<span style="color:#FEF3B5">firefox-pgo-minefield-smp</span> <span style="color:#E25A6B">100204-1</span> <span style="color:#4F3D53"|14|</span>
+    <span style="font-weight:normal">Mozilla Firefox customizable web browser (XULRunner independent, PGO optimized, 64-bit TraceMonkey, dev tree, multithreaded)</span>
+</code></pre>
+
+### 
+
+### Use the dzlad ruby module in irb
+
+    irb(main):001:0> require 'dzlad/aur'
+    => true
+    irb(main):002:0> aur = Dzlad::AUR.new
+    => #<Dzlad::AUR user= login=false>
+    irb(main):003:0> aur.login('userfoo', 'passbar')
+    => "AURSID=A9A1071B22C25ACDECF9399718D04B97; path=/"
+    irb(main):004:0> aur.addComment('33877', "Please note the dzlad-git package has been removed.\n--This is a test.")
+    => #<Net::HTTPOK 200 OK readbody=true>
+
