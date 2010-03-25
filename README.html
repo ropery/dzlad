@@ -48,9 +48,9 @@ Also note that the AUR currently supports only two simple "regexp", i.e. <em>%</
 <h4>Check for available upgrades for installed AUR packages</h4>
 
 <pre style="background-color:#232527;color:#6c6c6c;padding:0.8em 0.8em 0.8em 0.8em;font-weight:bold"><code><span style="font-weight:normal">$ dzlad -u</span>
-<span style="background-color:#FEF3B5;color:#232527">firefox-pgo</span><span style="font-weight:normal">.......................</span><span style="color:#e2d65a">3.6.2-1 >> </span><span style="color:#E25A6B">3.6-1</span>
-<span style="background-color:#FEF3B5;color:#232527">mypaint-git</span><span style="font-weight:normal">.......................</span><span style="color:#e2d65a">20100307-1 >> 20100208-2</span>
-<span style="color:#FEF3B5">vim-snipmate</span><span style="font-weight:normal">......................</span><span style="color:#9AE25A">0.83-1 -> 0.83-5</span>
+<span style="background-color:#FEF3B5;color:#232527">firefox-pgo</span><span style="font-weight:normal">.......................</span><span style="color:#e2d65a">3.6.2-1 &gt;&gt; </span><span style="color:#E25A6B">3.6-1</span>
+<span style="background-color:#FEF3B5;color:#232527">mypaint-git</span><span style="font-weight:normal">.......................</span><span style="color:#e2d65a">20100307-1 &gt;&gt; 20100208-2</span>
+<span style="color:#FEF3B5">vim-snipmate</span><span style="font-weight:normal">......................</span><span style="color:#9AE25A">0.83-1 -&gt; 0.83-5</span>
 <span style="color:#9AE25A;font-weight:bold">::</span> <span style="font-weight:normal">Upgradable AUR Packages:
 vim-snipmate</span>
 </code></pre>
@@ -81,14 +81,14 @@ $ dzlad --examples
 
 <h4>Use the dzlad ruby module in irb</h4>
 
-<pre style="background-color:#232527;color:#6c6c6c;padding:0.8em 0.8em 0.8em 0.8em"><code>irb(main):001:0> require 'dzlad/aur'
-=> true
-irb(main):002:0> aur = Dzlad::AUR.new
-=> #&lt;Dzlad::AUR user= login=false&gt;
-irb(main):003:0> aur.login('userfoo', 'passbar')
-=> "AURSID=N9N6576O77P75NPQRPS9899768Q58O79; path=/"
-irb(main):004:0> aur.addComment('33877', "Please note the dzlad-git package has been removed.\n--This is a test.")
-=> #&lt;Net::HTTPOK 200 OK readbody=true&gt;
+<pre style="background-color:#232527;color:#6c6c6c;padding:0.8em 0.8em 0.8em 0.8em"><code>irb(main):001:0&gt; require 'dzlad/aur'
+=&gt; true
+irb(main):002:0&gt; aur = Dzlad::AUR.new
+=&gt; #&lt;Dzlad::AUR user= login=false&gt;
+irb(main):003:0&gt; aur.login('userfoo', 'passbar')
+=&gt; "AURSID=N9N6576O77P75NPQRPS9899768Q58O79; path=/"
+irb(main):004:0&gt; aur.addComment('33877', "Please note the dzlad-git package has been removed.\n--This is a test.")
+=&gt; #&lt;Net::HTTPOK 200 OK readbody=true&gt;
 </code></pre>
 
 <hr />
