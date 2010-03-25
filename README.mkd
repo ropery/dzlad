@@ -60,7 +60,7 @@ $ dzlad -p msort-8.53-1.src.tar.gz@system:"New Release." --vote -u userfoo:passb
 
 #### Vote, flag, notify, adopt, disown, delete, unvote, unflag, unnotify
 
-<pre style="background-color:#232527;color:#6c6c6c;padding:0.8em 0.8em 0.8em 0.8em"><code> $ dzlad -a delete -u userfoo:passbar -c -- yajl-ruby
+<pre style="background-color:#232527;color:#6c6c6c;padding:0.8em 0.8em 0.8em 0.8em"><code>$ dzlad -a delete -u userfoo:passbar -c -- yajl-ruby
 <span style="color:#9AE25A;font-weight:bold">:: None of the selected packages could be deleted.
 </code></pre>
 
@@ -68,7 +68,7 @@ Oops, \`delete' is TU/dev only ^
 
 #### Also try...
 
-<pre style="background-color:#232527;color:#6c6c6c;padding:0.8em 0.8em 0.8em 0.8em"><code> $ dzlad -i dzlad
+<pre style="background-color:#232527;color:#6c6c6c;padding:0.8em 0.8em 0.8em 0.8em"><code>$ dzlad -i dzlad
 $ dzlad -m lolilolicon
 $ dzlad --examples
 </code></pre>
@@ -78,11 +78,11 @@ $ dzlad --examples
 <pre style="background-color:#232527;color:#6c6c6c;padding:0.8em 0.8em 0.8em 0.8em"><code>irb(main):001:0> require 'dzlad/aur'
 => true
 irb(main):002:0> aur = Dzlad::AUR.new
-=> #<Dzlad::AUR user= login=false>
+=> #&lt;Dzlad::AUR user= login=false&gt;
 irb(main):003:0> aur.login('userfoo', 'passbar')
 => "AURSID=N9N6576O77P75NPQRPS9899768Q58O79; path=/"
 irb(main):004:0> aur.addComment('33877', "Please note the dzlad-git package has been removed.\n--This is a test.")
-=> #<Net::HTTPOK 200 OK readbody=true>
+=> #&lt;Net::HTTPOK 200 OK readbody=true&gt;
 </code></pre>
 
 ---
