@@ -18,7 +18,7 @@ module Dzlad
       :license => ['MIT']
     }
 
-    RootDir = File.join(ENV[:HOME], '.dzlad')
+    RootDir = File.join(ENV['HOME'], '.dzlad')
     Ignored = File.join(Dzlad::RootDir, 'upgrade_ignore')
     Configs = File.join(Dzlad::RootDir, 'config')
     Session = File.join(Dzlad::RootDir, 'cookie')

@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 begin
-  require 'rubygems'
+#  require 'rubygems'
   require 'yajl/json_gem'
 rescue LoadError
   require 'json'
