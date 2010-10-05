@@ -271,7 +271,7 @@ module Dzlad
 
     # Return the message String out of HTTPResponse returned by actions.
     def read_package_action_response(res)
-      res.body =~ /.*<div class="pkgoutput">([^<]+)<.*/m
+      res.body =~ /.*<p class="pkgoutput">([^<]+)<.*/m
       message = $1
     end
 
