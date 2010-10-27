@@ -13,7 +13,7 @@ module Dzlad
     include Printing
 
     Meta = {
-      :version => ['0.1.2', '20100307'],
+      :version => ['0.1.3', '20101027'],
       :authors => ['lolilolicon <lolilolicon@gmail.com>'],
       :license => ['MIT']
     }
