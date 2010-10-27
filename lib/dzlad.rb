@@ -271,12 +271,12 @@ module Dzlad
             comment = $stdin.read if comment == '-' #read comment from stdin if it's '-'
             res = aur.addComment(id, comment) if comment #maybe check res too.
           else
-            error = (aur.read_upload_error_message(res) || 'Unkown error while uploading')
+            error = (aur.read_upload_error_message(res) || 'Unknown error while uploading')
             $stderr.print err "%s", error
           end
         }
         # vote all at once instead one by one.
-        $stdout.print msg "%s", (aur.read_package_action_response(aur.vote(*ids)) || "Unkown error while voting") if @opts.vote_at_submit and !ids.empty?
+        $stdout.print msg "%s", (aur.read_package_action_response(aur.vote(*ids)) || "Unknown error while voting") if @opts.vote_at_submit and !ids.empty?
       else # made sure above it's one of the "other" AUR actions
         prepare_aur_cookie
         aur = AUR.new(@cookie)
@@ -295,7 +295,7 @@ module Dzlad
           }
         end
         ($stderr.print err "No ID retrieved for any of the given packages"; exit EXIT::FAIL) if ids.empty?
-        $stdout.print msg "%s", (aur.read_package_action_response(aur.__send__(@opts.action.to_sym,*ids)) || "Unkown error occurred, action failed: #{@opts.action}")
+        $stdout.print msg "%s", (aur.read_package_action_response(aur.__send__(@opts.action.to_sym,*ids)) || "Unknown error occurred, action failed: #{@opts.action}")
       end
     end
 
