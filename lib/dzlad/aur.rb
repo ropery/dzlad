@@ -8,7 +8,7 @@ rescue LoadError
   require 'json'
 end
 require 'uri'
-require 'net/http'
+require 'net/https'
 require 'stringio'
 require 'zlib'
 
@@ -21,7 +21,7 @@ module Dzlad
   #
   class AUR
 
-    BaseURI    = 'http://aur.archlinux.org'
+    BaseURI    = 'https://aur.archlinux.org'
     SearchURI  = BaseURI + '/rpc.php?type=search&arg='  # search in package Name and Description
     MSearchURI = BaseURI + '/rpc.php?type=msearch&arg=' # search by Maintainer name
     InfoURI    = BaseURI + '/rpc.php?type=info&arg='    # search info about an exact package by name or id
@@ -84,7 +84,9 @@ module Dzlad
       req['accept-encoding'] = 'gzip'
       req['content-type'] = 'application/x-www-form-urlencoded'
       req['content-length'] = req.body.length
-      res = Net::HTTP.new(uri.host, uri.port).start do |http|
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true if uri.scheme == "https"
+      res = http.start {
         http.request(req) {|r|
           if r.key?('content-encoding')
             if r['content-encoding'] == 'gzip'
@@ -93,7 +95,7 @@ module Dzlad
             end
           end
         }
-      end
+      }
     end
 
     # TODO Exeptions
@@ -107,7 +109,9 @@ module Dzlad
       header['cookie'] = @cookie if @cookie
       uri = URI.parse(uri)
       req = Net::HTTP::Get.new(uri.request_uri, header)
-      res = Net::HTTP.new(uri.host, uri.port).start do |http|
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true if uri.scheme == "https"
+      res = http.start {
         http.request(req) {|r|
           if r.key?('content-encoding')
             if r['content-encoding'] == 'gzip'
@@ -116,7 +120,7 @@ module Dzlad
             end
           end
         }
-      end
+      }
     end
 
     # Parse the json String returned from the HTTP request into a Hash.
@@ -200,7 +204,11 @@ module Dzlad
       body = compose_multipart_post_body(boundary, form_fields, file_fields)
       req['content-length'] = body.size
       req.body_stream = body
-      res = Net::HTTP.new(uri.host, uri.port).start {|http| http.request(req)}
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true if uri.scheme == "https"
+      res = http.start {
+        http.request(req)
+      }
     end
 
     # Prepare body for a multipart/form-data post request; returns a StringIO object.
