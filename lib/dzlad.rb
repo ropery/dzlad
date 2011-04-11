@@ -357,7 +357,7 @@ ignored by default next time
 
     def prepare_aur_cookie
       @cookie = login_aur(@opts.cookie, @opts.username, @opts.password)
-      ($sdterr.print err 'AUR login failed'; exit EXIT::AUR_BAD_AUTH) unless @cookie
+      ($stderr.print err 'AUR login failed'; exit EXIT::AUR_BAD_AUTH) unless @cookie
       if @opts.save_cookie_in
         try_make_dzlad_rootdir if @opts.save_cookie_in == Dzlad::Session
         File.open(@opts.save_cookie_in,'w') {|f| f << @cookie} # note this overwrites any existing file. (!)

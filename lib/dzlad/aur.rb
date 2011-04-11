@@ -249,7 +249,9 @@ module Dzlad
     end
 
     def read_upload_error_message(res)
-      res.body =~ /.*^<span class='error'>([^\n]+)<\/span><br \/>$.*/m
+      res.body =~ /.*^<span class='error'>([^\n]+)<\/span><br \/>$.*/m ||
+        res.body =~ /.*<p class="pkgoutput">([^<]+)<.*/m ||
+        res.body =~ /^(You must create an account before you can upload packages\.)$/
       error = $1
       return nil unless error
       error.gsub(/<[^>]+>/,'')
